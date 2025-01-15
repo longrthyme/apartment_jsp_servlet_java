@@ -38,10 +38,10 @@ public class ApartmentDao {
                  "apartment.posted_date, images.URL AS url, apartmentview.view_count AS viewCount, " +
                  "appartment_address.nameAddress " +
                  "FROM images " +
-                 "INNER JOIN apartment ON images.apartmentID = apartment.ID " +
-                 "INNER JOIN category ON apartment.categoryID = category.ID " +
-                 "INNER JOIN apartmentview ON apartment.ID = apartmentview.apartmentID " +
-                 "INNER JOIN appartment_address ON apartment.addressID = appartment_address.ID ";
+                 "LEFT JOIN apartment ON images.apartmentID = apartment.ID " +
+                 "LEFT JOIN category ON apartment.categoryID = category.ID " +
+                 "LEFT JOIN apartmentview ON apartment.ID = apartmentview.apartmentID " +
+                 "LEFT JOIN appartment_address ON apartment.addressID = appartment_address.ID ";
                 //  "WHERE category.ID = 1";   // Assuming category ID 1 is for "selling apartments"
     
         return jdbi.withHandle(handle ->
@@ -94,7 +94,7 @@ public class ApartmentDao {
         "    posted_date = :postedDate, " +
         "    addressID = (SELECT ID FROM appartment_address WHERE nameAddress = :nameAddress) " +
         "WHERE id = :id";
-        
+
         try {
             int rowsAffected = jdbi.withHandle(handle ->
                 handle.createUpdate(sql)
@@ -119,6 +119,44 @@ public class ApartmentDao {
         }
     }
 
+
+    public void insertApartment(Apartment apartment) {
+        String sql = "INSERT INTO apartment (name, `describe`, price, typeID, area, bedroom, bathroom, toilet, interior, legal, posted_date, addressID, userID, categoryID, amenitiesID) " +
+        "VALUES (:name, :describe, :price, :typeID, :area, :bedroom, :bathroom, :toilet, :interior, :legal, :postedDate, :addressID, :userID, :categoryID, :amenitiesID)";
+
+// Insert into database using JDBI with named parameters
+jdbi.useHandle(handle -> 
+handle.createUpdate(sql)
+     .bind("name", apartment.getName())
+     .bind("describe", apartment.getDescribe() != null ? apartment.getDescribe() : null)  // Default to NULL if describe is not provided
+     .bind("price", apartment.getPrice() != 0 ? apartment.getPrice() : null) // Default to NULL if price is 0 (or not provided)
+     .bind("typeID", 2) // Default to NULL if typeID is 0 (or not provided)
+     .bind("area", apartment.getArea() != 0 ? apartment.getArea() : null)  // Default to NULL if area is 0 (or not provided)
+     .bind("bedroom", apartment.getBedroom() != 0 ? apartment.getBedroom() : null) // Default to NULL if bedroom is 0 (or not provided)
+     .bind("bathroom", apartment.getBathroom() != 0 ? apartment.getBathroom() : null) // Default to NULL if bathroom is 0 (or not provided)
+     .bind("toilet", apartment.getToilet() != 0 ? apartment.getToilet() : null)  // Default to NULL if toilet is 0 (or not provided)
+     .bind("interior", apartment.getInterior() != null ? apartment.getInterior() : null) // Default to NULL if interior is not provided
+     .bind("legal", apartment.getLegal() != null ? apartment.getLegal() : null) // Default to NULL if legal is not provided
+     .bind("postedDate", apartment.getPostedDate() != null ? apartment.getPostedDate() : null) // Default to NULL if postedDate is not provided
+     .bind("addressID", 48) // Default to NULL if addressID is 0 (or not provided)
+     .bind("userID", 1) // Default to NULL if userID is 0 (or not provided)
+     .bind("categoryID", 1) // Default to NULL if categoryID is 0 (or not provided)
+     .bind("amenitiesID",2)
+     .execute()
+);
+
+}
+
+
+    public void deleteApartment(int id) {
+        String sql = "DELETE FROM apartment WHERE id = :id";
+    
+        jdbi.useHandle(handle ->
+            handle.createUpdate(sql)
+                  .bind("id", id)
+                  .execute()
+        );
+    }
 
     
 

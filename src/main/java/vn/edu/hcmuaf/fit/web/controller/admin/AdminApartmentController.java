@@ -27,13 +27,13 @@ public class AdminApartmentController extends HttpServlet {
                 listApartments(request, response);
                 break;
             case "add":
-                // showAddForm(request, response);
+                showAddForm(request, response);
                 break;
             case "edit":
                 showEditForm(request, response);
                 break;
             case "delete":
-                // deleteApartment(request, response);
+                deleteApartment(request, response);
                 break;
             default:
                 listApartments(request, response);
@@ -46,7 +46,7 @@ public class AdminApartmentController extends HttpServlet {
         String action = request.getParameter("action");
         switch (action) {
             case "add":
-                // insertApartment(request, response);
+                insertApartment(request, response);
                 break;
             case "update":
                 updateApartment(request, response);
@@ -84,25 +84,29 @@ public class AdminApartmentController extends HttpServlet {
         request.getRequestDispatcher("/Admin/apartment/list.jsp").forward(request, response);
     }
 
-    // private void showAddForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    //     request.getRequestDispatcher("/admin/apartment/add.jsp").forward(request, response);
-    // }
+    private void showAddForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("In shw form");
+        request.getRequestDispatcher("/Admin/apartment/add.jsp").forward(request, response);
+    }
 
-    // private void insertApartment(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    //     String name = request.getParameter("name");
-    //     String describe = request.getParameter("describe");
-    //     double price = Double.parseDouble(request.getParameter("price"));
-    //     double area = Double.parseDouble(request.getParameter("area"));
-    //     int bedroom = Integer.parseInt(request.getParameter("bedroom"));
-    //     int bathroom = Integer.parseInt(request.getParameter("bathroom"));
-    //     int toilet = Integer.parseInt(request.getParameter("toilet"));
-    //     String interior = request.getParameter("interior");
-    //     String legal = request.getParameter("legal");
+    private void insertApartment(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        System.out.println("In inset depart");
+        String name = request.getParameter("name");
+        String describe = request.getParameter("describe");
+        double price = Double.parseDouble(request.getParameter("price"));
+        double area = Double.parseDouble(request.getParameter("area"));
+        int bedroom = Integer.parseInt(request.getParameter("bedroom"));
+        int bathroom = Integer.parseInt(request.getParameter("bathroom"));
+        int toilet = Integer.parseInt(request.getParameter("toilet"));
+        String interior = request.getParameter("interior");
+        String legal = request.getParameter("legal");
+        String addressString = request.getParameter("nameAddress");
+        
 
-    //     Apartment apartment = new Apartment(0, name, describe, price, area, bedroom, bathroom, toilet, interior, legal, LocalDateTime.now(), null, 0, null);
-    //     apartmentDao.insertApartment(apartment);
-    //     response.sendRedirect("admin/apartment?action=list");
-    // }
+        Apartment apartment = new Apartment(0, name, describe, price, area, bedroom, bathroom, toilet, interior, legal, LocalDateTime.now(), null, 0, addressString);
+        apartmentDao.insertApartment(apartment);
+        response.sendRedirect(request.getContextPath() + "/admin/apartment?action=list");
+    }
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
@@ -153,9 +157,9 @@ if (apartment != null) {
         response.sendRedirect(request.getContextPath() + "/admin/apartment?action=list");
     }
 
-    // private void deleteApartment(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    //     int id = Integer.parseInt(request.getParameter("id"));
-    //     apartmentDao.deleteApartment(id);
-    //     response.sendRedirect("admin/apartment?action=list");
-    // }
+    private void deleteApartment(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        apartmentDao.deleteApartment(id);
+        response.sendRedirect(request.getContextPath() + "/admin/apartment?action=list");
+    }
 }

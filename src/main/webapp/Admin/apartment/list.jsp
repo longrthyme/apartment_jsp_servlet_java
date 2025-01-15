@@ -110,6 +110,11 @@
       .actions a.delete:hover {
         background-color: #c82333;
       }
+
+      .delete {
+        margin-top: 5px;
+        display: block;
+      }
     </style>
   </head>
 
@@ -162,6 +167,11 @@
               <td class="actions">
                 <a href="apartment?action=edit&id=${apartment.id}" class="edit"
                   >Edit</a
+                >
+                <a
+                  href="apartment?action=delete&id=${apartment.id}"
+                  class="delete"
+                  >Delete</a
                 >
               </td>
             </tr>
