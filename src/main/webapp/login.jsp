@@ -1,0 +1,58 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page isELIgnored="false" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng nhập</title>
+  <link rel="stylesheet" href="User/css/login.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js"
+          integrity="sha512-6sSYJqDreZRZGkJ3b+YfdhB3MzmuP9R7X1QZ6g5aIXhRvR1Y/N/P47jmnkENm7YL3oqsmI6AK+V6AD99uWDnIw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+</head>
+<body>
+<div class="container">
+
+  <div class="containt">
+    <a href="User/html/home.html" class="back-icon"><i class="fa-solid fa-arrow-left" style="color: black"></i></a>
+    <h2>Xin chào bạn</h2>
+    <h3>Đăng nhập để tiếp tục</h3>
+
+    <form method="post" action="login">
+
+      <p class = "text-danger">${mess}</p>
+      <div class="input-group">
+        <i class="fa-regular fa-user"  style="color: black;"></i>
+        <input type="text" placeholder="Tên đăng nhập" name="user" required>
+      </div>
+      <div class="input-group">
+        <i class="fa-solid fa-lock"></i>
+        <input type="password" placeholder="Mật khẩu" name="pass" required>
+      </div>
+      <button type="submit" class="btn">Đăng nhập</button>
+      <div class="options">
+        <label><input type="checkbox"> Nhớ tài khoản</label>
+        <a href="User/html/reset-password.html">Quên mật khẩu?</a>
+      </div>
+    </form>
+    <p class="or">Hoặc</p>
+
+    <button class="social-btn facebook">
+      Đăng nhập với Facebook
+      <img src="User/images/face.pnj.jpg" alt="Ảnh face" class="img-face">
+    </button>
+
+    <button class="social-btn google">
+      Đăng nhập với Google
+      <img src="User/images/google.pnj.png" alt="Ảnh google" class="img-gg">
+    </button>
+    <p class="terms">Bằng việc tiếp tục, bạn đồng ý với <a href="#">Điều khoản sử dụng</a>, <a href="#">Chính sách bảo mật</a></p>
+    <p class="register">Chưa là thành viên? <a href="User/html/signup.html">Đăng ký tại đây</a></p>
+  </div>
+</div>
+</body>
+</html>

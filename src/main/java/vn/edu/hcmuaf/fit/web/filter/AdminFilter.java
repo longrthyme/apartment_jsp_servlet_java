@@ -1,0 +1,36 @@
+//package vn.edu.hcmuaf.fit.web.filter;
+//
+//import jakarta.servlet.*;
+//import jakarta.servlet.annotation.*;
+//import jakarta.servlet.http.HttpServletRequest;
+//import jakarta.servlet.http.HttpServletResponse;
+//import jakarta.servlet.http.HttpSession;
+//import vn.edu.hcmuaf.fit.web.dao.model.User;
+//
+//import java.io.IOException;
+//
+//@WebFilter(filterName = "AdminFilter", urlPatterns = "/admin/*")
+//public class AdminFilter implements Filter {
+//
+//    public void init(FilterConfig config) throws ServletException {
+//    }
+//
+//    public void destroy() {
+//    }
+//
+//    @Override
+//
+//    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
+//        HttpServletRequest req = (HttpServletRequest) request;
+//        HttpServletResponse res = (HttpServletResponse) response;
+//
+//
+//        HttpSession session = req.getSession(true);
+//        User u = session.setAttribute("admin");
+//        if (u == null || u.getRole()<1) {
+//            res.sendRedirect("/admin/login.jsp");
+//            return;
+//        }
+//        chain.doFilter(request, response);
+//    }
+//}
