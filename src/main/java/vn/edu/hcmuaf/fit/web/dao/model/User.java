@@ -1,5 +1,4 @@
 package vn.edu.hcmuaf.fit.web.dao.model;
-
 public class User {
     private int id;
     private int roleID;
@@ -8,6 +7,11 @@ public class User {
     private String email;
     private String phone;
 
+    // No-argument constructor (required by JDBI)
+    public User() {
+    }
+
+    // Full-argument constructor
     public User(int id, int roleID, String name, String password, String email, String phone) {
         this.id = id;
         this.roleID = roleID;
@@ -17,17 +21,15 @@ public class User {
         this.phone = phone;
     }
 
+    // Partial-argument constructor
     public User(int id, int roleID, String name, String password) {
         this.id = id;
         this.roleID = roleID;
         this.name = name;
         this.password = password;
-
     }
 
-
-
-
+    // Getters and setters (required for JDBI mapping)
     public int getId() {
         return id;
     }
@@ -74,18 +76,5 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", roleID=" + roleID +
-                ", name='" + name + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
-                '}';
     }
 }
