@@ -10,10 +10,34 @@
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <style>
+      a.add-new-btn {
+        display: inline-block;
+        background-color: #28a745;
+        color: white;
+        padding: 10px 20px;
+        margin: 20px 0;
+        border-radius: 5px;
+        text-decoration: none;
+      }
+
+      a.add-new-btn:hover {
+        background-color: #218838;
+      }
+    </style>
   </head>
   <body>
     <div class="container mt-4">
       <h2>User List</h2>
+
+      <%-- Display error message if present --%>
+      <c:if test="${not empty sessionScope.errorMessage}">
+        <div class="alert alert-danger">${sessionScope.errorMessage}</div>
+        <%-- Remove the error message from session after displaying --%>
+        <c:remove var="errorMessage" scope="session" />
+      </c:if>
+
+      <a href="account?action=add" class="add-new-btn">Add New User </a>
 
       <!-- Table to display users -->
       <table class="table table-bordered">
@@ -38,10 +62,14 @@
 
               <td>
                 <!-- Example: Add edit and delete buttons (you can implement them later) -->
-                <a href="editUser?id=${user.id}" class="btn btn-primary btn-sm"
+                <a
+                  href="account?action=edit&id=${user.id}"
+                  class="btn btn-primary btn-sm"
                   >Edit</a
                 >
-                <a href="deleteUser?id=${user.id}" class="btn btn-danger btn-sm"
+                <a
+                  href="account?action=delete&id=${user.id}"
+                  class="btn btn-danger btn-sm"
                   >Delete</a
                 >
               </td>
