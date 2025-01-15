@@ -51,6 +51,34 @@ public class ApartmentDao {
         );
     }
 
+
+    public Apartment getApartmentById(int id) {
+        String sql = "SELECT apartment.id, apartment.name, apartment.describe, apartment.price, apartment.area, " +
+                     "apartment.bedroom, apartment.bathroom, apartment.toilet, apartment.interior, apartment.legal, " +
+                     "apartment.posted_date, images.URL AS url, apartmentview.view_count AS viewCount, " +
+                     "appartment_address.nameAddress " +
+                     "FROM images " +
+                     "INNER JOIN apartment ON images.apartmentID = apartment.ID " +
+                     "INNER JOIN category ON apartment.categoryID = category.ID " +
+                     "INNER JOIN apartmentview ON apartment.ID = apartmentview.apartmentID " +
+                     "INNER JOIN appartment_address ON apartment.addressID = appartment_address.ID " +
+                     "WHERE apartment.id = :id";  // using named parameter for apartment ID
+    
+        
+
+                     Apartment apartment = jdbi.withHandle(handle ->
+        handle.createQuery(sql)
+              .bind("id", id)  // bind the 'id' parameter to the query
+              .mapToBean(Apartment.class)
+              .findOnly()  // retrieves a single result, throws an exception if not found
+    );
+    
+    return apartment;  // If apartment is not found, it will return null
+
+    
+    }
+    
+
     public List<Apartment> getAllProductsRent() {
         String sql = "SELECT apartment.id AS apartment_id, apartment.name, apartment.describe, apartment.price, apartment.area, apartment.bedroom, apartment.bathroom, apartment.toilet, apartment.interior, apartment.legal, apartment.posted_date, images.URL, apartmentview.view_count , appartment_address.nameAddress\n" +
                 "FROM images \n" +

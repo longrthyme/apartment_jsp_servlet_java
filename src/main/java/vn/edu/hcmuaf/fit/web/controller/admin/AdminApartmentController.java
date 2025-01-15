@@ -29,7 +29,7 @@ public class AdminApartmentController extends HttpServlet {
                 // showAddForm(request, response);
                 break;
             case "edit":
-                // showEditForm(request, response);
+                showEditForm(request, response);
                 break;
             case "delete":
                 // deleteApartment(request, response);
@@ -103,12 +103,30 @@ public class AdminApartmentController extends HttpServlet {
     //     response.sendRedirect("admin/apartment?action=list");
     // }
 
-    // private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    //     int id = Integer.parseInt(request.getParameter("id"));
-    //     Apartment existingApartment = apartmentDao.getApartmentById(id);
-    //     request.setAttribute("apartment", existingApartment);
-    //     request.getRequestDispatcher("/admin/apartment/edit.jsp").forward(request, response);
-    // }
+    private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+        int apartmentId = Integer.parseInt(request.getParameter("id"));
+Apartment apartment = apartmentDao.getApartmentById(apartmentId);
+
+
+if (apartment != null) {
+
+    System.out.println("detail apart id " + apartmentId + " " + apartment.getId());
+
+    request.setAttribute("apartment", apartment);
+    request.getRequestDispatcher("/Admin/apartment/edit.jsp").forward(request, response);
+} else {
+    System.out.println("detail apart id " + apartmentId );
+    // Handle the case where the apartment with the given ID doesn't exist
+    request.setAttribute("error", "Apartment not found.");
+    request.getRequestDispatcher("/path/to/errorPage.jsp").forward(request, response);
+}
+
+        // int id = Integer.parseInt(request.getParameter("id"));
+        // Apartment existingApartment = apartmentDao.getApartmentById(id);
+        // request.setAttribute("apartment", existingApartment);
+        // request.getRequestDispatcher("/admin/apartment/edit.jsp").forward(request, response);
+    }
 
     // private void updateApartment(HttpServletRequest request, HttpServletResponse response) throws IOException {
     //     int id = Integer.parseInt(request.getParameter("id"));
