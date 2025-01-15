@@ -33,17 +33,22 @@ public class ApartmentDao {
     }
 
     public List<Apartment> getAllApartments() {
+        // String sql = "SELECT apartment.id, apartment.name, apartment.describe, apartment.price, apartment.area, " +
+        //          "apartment.bedroom, apartment.bathroom, apartment.toilet, apartment.interior, apartment.legal, " +
+        //          "apartment.posted_date, images.URL AS url, apartmentview.view_count AS viewCount, " +
+        //          "appartment_address.nameAddress " +
+        //          "FROM images " +
+        //          "LEFT JOIN apartment ON images.apartmentID = apartment.ID " +
+        //          "LEFT JOIN category ON apartment.categoryID = category.ID " +
+        //          "LEFT JOIN apartmentview ON apartment.ID = apartmentview.apartmentID " +
+        //          "LEFT JOIN appartment_address ON apartment.addressID = appartment_address.ID ";
+        //         //  "WHERE category.ID = 1";   // Assuming category ID 1 is for "selling apartments"
         String sql = "SELECT apartment.id, apartment.name, apartment.describe, apartment.price, apartment.area, " +
-                 "apartment.bedroom, apartment.bathroom, apartment.toilet, apartment.interior, apartment.legal, " +
-                 "apartment.posted_date, images.URL AS url, apartmentview.view_count AS viewCount, " +
-                 "appartment_address.nameAddress " +
-                 "FROM images " +
-                 "LEFT JOIN apartment ON images.apartmentID = apartment.ID " +
-                 "LEFT JOIN category ON apartment.categoryID = category.ID " +
-                 "LEFT JOIN apartmentview ON apartment.ID = apartmentview.apartmentID " +
-                 "LEFT JOIN appartment_address ON apartment.addressID = appartment_address.ID ";
-                //  "WHERE category.ID = 1";   // Assuming category ID 1 is for "selling apartments"
-    
+             "apartment.bedroom, apartment.bathroom, apartment.toilet, apartment.interior, apartment.legal, " +
+             "apartment.posted_date " +  // Added a space here before "FROM"
+             "FROM apartment";
+
+             
         return jdbi.withHandle(handle ->
                 handle.createQuery(sql)
                       .mapToBean(Apartment.class)

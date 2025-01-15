@@ -140,9 +140,9 @@
             <th>Interior</th>
             <th>Legal</th>
             <th>Posted Date</th>
-            <th>URL</th>
-            <th>View Count</th>
-            <th>Address</th>
+            <!-- <th>URL</th> -->
+            <!-- <th>View Count</th> -->
+            <!-- <th>Address</th> -->
             <th>Actions</th>
           </tr>
         </thead>
@@ -156,14 +156,14 @@
               <td>${apartment.area}</td>
               <td>${apartment.bedroom}</td>
               <td>${apartment.bathroom}</td>
-              <td>${apartment.toilet}</td>
+              <!-- <td>${apartment.toilet}</td> -->
               <td>${apartment.interior}</td>
               <td>${apartment.legal}</td>
               <td>${apartment.postedDate}</td>
               <!-- Use formattedPostedDate -->
-              <td><a href="${apartment.url}" target="_blank">View Image</a></td>
-              <td>${apartment.viewCount}</td>
-              <td>${apartment.nameAddress}</td>
+              <!-- <td><a href="${apartment.url}" target="_blank">View Image</a></td> -->
+              <!-- <td>${apartment.viewCount}</td> -->
+              <!-- <td>${apartment.nameAddress}</td> -->
               <td class="actions">
                 <a href="apartment?action=edit&id=${apartment.id}" class="edit"
                   >Edit</a
