@@ -1,6 +1,7 @@
 package vn.edu.hcmuaf.fit.web.controller.admin;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import jakarta.servlet.ServletException;
@@ -47,8 +48,8 @@ public class AdminApartmentController extends HttpServlet {
             case "add":
                 // insertApartment(request, response);
                 break;
-            case "edit":
-                // updateApartment(request, response);
+            case "update":
+                updateApartment(request, response);
                 break;
             default:
                 response.sendRedirect("admin/apartment?action=list");
@@ -128,22 +129,29 @@ if (apartment != null) {
         // request.getRequestDispatcher("/admin/apartment/edit.jsp").forward(request, response);
     }
 
-    // private void updateApartment(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    //     int id = Integer.parseInt(request.getParameter("id"));
-    //     String name = request.getParameter("name");
-    //     String describe = request.getParameter("describe");
-    //     double price = Double.parseDouble(request.getParameter("price"));
-    //     double area = Double.parseDouble(request.getParameter("area"));
-    //     int bedroom = Integer.parseInt(request.getParameter("bedroom"));
-    //     int bathroom = Integer.parseInt(request.getParameter("bathroom"));
-    //     int toilet = Integer.parseInt(request.getParameter("toilet"));
-    //     String interior = request.getParameter("interior");
-    //     String legal = request.getParameter("legal");
+    private void updateApartment(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
 
-    //     Apartment apartment = new Apartment(id, name, describe, price, area, bedroom, bathroom, toilet, interior, legal, LocalDateTime.now(), null, 0, null);
-    //     apartmentDao.updateApartment(apartment);
-    //     response.sendRedirect("admin/apartment?action=list");
-    // }
+        System.out.println("IN update specific " + id);
+        String name = request.getParameter("name");
+        String describe = request.getParameter("describe");
+        double price = Double.parseDouble(request.getParameter("price"));
+        double area = Double.parseDouble(request.getParameter("area"));
+        int bedroom = Integer.parseInt(request.getParameter("bedroom"));
+        int bathroom = Integer.parseInt(request.getParameter("bathroom"));
+        int toilet = Integer.parseInt(request.getParameter("toilet"));
+        String interior = request.getParameter("interior");
+        String legal = request.getParameter("legal");
+        String address = request.getParameter("nameAddress");
+
+        
+
+        Apartment apartment = new Apartment(id, name, describe, price, area, bedroom, bathroom, toilet, interior, legal, LocalDateTime.now(), null, 0, address);
+
+        System.out.println("id after update " + apartment.getId());
+        apartmentDao.updateApartment(apartment);
+        response.sendRedirect(request.getContextPath() + "/admin/apartment?action=list");
+    }
 
     // private void deleteApartment(HttpServletRequest request, HttpServletResponse response) throws IOException {
     //     int id = Integer.parseInt(request.getParameter("id"));

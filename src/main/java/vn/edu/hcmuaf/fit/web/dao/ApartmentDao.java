@@ -75,8 +75,51 @@ public class ApartmentDao {
     
     return apartment;  // If apartment is not found, it will return null
 
-    
+
     }
+    
+
+
+    public boolean updateApartment(Apartment apartment) {
+        String sql = "UPDATE apartment " +
+        "SET name = :name, " +
+        "    `describe` = :describe, " + // Enclosed describe in backticks
+        "    price = :price, " +
+        "    area = :area, " +
+        "    bedroom = :bedroom, " +
+        "    bathroom = :bathroom, " +
+        "    toilet = :toilet, " +
+        "    interior = :interior, " +
+        "    legal = :legal, " +
+        "    posted_date = :postedDate, " +
+        "    addressID = (SELECT ID FROM appartment_address WHERE nameAddress = :nameAddress) " +
+        "WHERE id = :id";
+        
+        try {
+            int rowsAffected = jdbi.withHandle(handle ->
+                handle.createUpdate(sql)
+                      .bind("id", apartment.getId())
+                      .bind("name", apartment.getName())
+                      .bind("describe", apartment.getDescribe())
+                      .bind("price", apartment.getPrice())
+                      .bind("area", apartment.getArea())
+                      .bind("bedroom", apartment.getBedroom())
+                      .bind("bathroom", apartment.getBathroom())
+                      .bind("toilet", apartment.getToilet())
+                      .bind("interior", apartment.getInterior())
+                      .bind("legal", apartment.getLegal())
+                      .bind("postedDate", apartment.getPostedDate())
+                      .bind("nameAddress", apartment.getNameAddress())
+                      .execute()
+            );
+            return rowsAffected > 0; // Return true if at least one row was updated
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false; // Return false if an exception occurs
+        }
+    }
+
+
     
 
     public List<Apartment> getAllProductsRent() {

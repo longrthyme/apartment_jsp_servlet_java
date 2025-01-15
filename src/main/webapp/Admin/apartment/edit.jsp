@@ -16,7 +16,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
     <div class="container mt-4">
       <h1>Edit Apartment</h1>
 
-      <form action="ApartmentServlet?action=update" method="post">
+      <form action="apartment?action=update" method="post">
         <input type="hidden" name="id" value="${apartment.id}" />
 
         <div class="mb-3">
@@ -118,7 +118,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
           />
         </div>
 
-        <div class="mb-3">
+        <!-- <div class="mb-3">
           <label for="postedDate" class="form-label">Posted Date:</label>
           <input
             type="datetime-local"
@@ -127,9 +127,9 @@ uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
             value="${apartment.postedDate}"
             required
           />
-        </div>
+        </div> -->
 
-        <div class="mb-3">
+        <!-- <div class="mb-3">
           <label for="viewCount" class="form-label">View Count:</label>
           <input
             type="number"
@@ -138,7 +138,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
             value="${apartment.viewCount}"
             required
           />
-        </div>
+        </div> -->
 
         <div class="mb-3">
           <label for="nameAddress" class="form-label">Address:</label>
@@ -154,7 +154,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
         <button type="submit" class="btn btn-primary">Update Apartment</button>
       </form>
 
-      <a href="ApartmentServlet?action=list" class="btn btn-secondary mt-3"
+      <a href="/admin/apartment?action=list" class="btn btn-secondary mt-3"
         >Back to List</a
       >
     </div>
